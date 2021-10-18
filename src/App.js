@@ -1,4 +1,4 @@
-import Wrapper from './Wrapper';
+import Grid from './Grid';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 
@@ -10,7 +10,7 @@ function App() {
       height: '80vh',
       overflowY: 'auto'
     }}>
-      <Wrapper />
+      <Grid />
     </div>
   );
 }
