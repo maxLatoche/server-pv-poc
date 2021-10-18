@@ -2,7 +2,7 @@
 
 ## Takeaways
 
-All of the meaningful logic is in ./Grid.js
+All of the meaningful logic is in ./src/Grid.js
 
 This is incomplete with lots of problems, but the takeaways are:
 

@@ -22,7 +22,7 @@ export default () => {
 	}, [])
 
 	useEffect(() => {
-		// simulate async
+		// simulate api call to get filterParams
 		setTimeout(() => {
 			setFilterParams(
 				['Jim', 'Jane', 'Joe']
@@ -45,19 +45,15 @@ export default () => {
 				{
 					field:"trips",
 					colId:"email",
-
 				},
 			]}
-			defaultColDef={{
-				filter: true,
-				filterParams: {...filterParams}
-			}}
 			getRowNodeId={getRowNodeId}
 			onBodyScroll={(event) => {
 				if (!rowData) return
 
 				// each row is 28 pixels
 				if (rowData.length * 28 == event.api.getVerticalPixelRange().bottom) {
+					// always going to fetch page 1, in a real app this would fetch page n + 1
 					fetch('https://api.instantwebtools.net/v1/passenger?page=1&size=50').then(async res => {
 						const body = await res.json()
 
@@ -70,11 +66,11 @@ export default () => {
 			}}
 			loadingOverlayComponent='LoadingComponent'
 			onFilterChanged={(e) => {
-				console.log(e)
 				e.api.showLoadingOverlay()
 				setRowData([])
 				setTimeout(() => {
 					// we can't actually filter or sort on this free api, but this is where the query would go with sort, limit, filter params etc.	
+					// there isn't a meaningful reason for fetching page 2 here, it's just to change the data in rowData state
 					fetch('https://api.instantwebtools.net/v1/passenger?page=2&size=50').then(async res => {
 						e.api.hideOverlay();
 						const body = await res.json()
